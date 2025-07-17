@@ -1,0 +1,14 @@
+version: "3.6"
+
+services:
+  lexx-zev:
+    hostname: lexx 
+    image: simonjohngreen/lexx-zev:1.0
+    container_name: lexx-zev 
+    restart: always
+    ports:
+    - "3306:3306"
+    environment:
+    - SUBI_DATABASE_FILE=/zev/subi.sql 
+    volumes:
+    - ./zev:/zev

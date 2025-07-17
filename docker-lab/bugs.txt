@@ -1,0 +1,14 @@
+
+Zev bug1) 
+
+on start: 
+
+su: warning: cannot change directory to /nonexistent: No such file or directory
+
+Zev bug2)  mysql: [Warning] Using a password on the command line interface can be insecure.
+
+
+
+
+
+

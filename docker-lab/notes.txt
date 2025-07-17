@@ -1,0 +1,164 @@
+######################################
+#docker based lab
+######################################
+#These steps will build a docker based environment locally in order to test and develop the lexx code
+#
+#four dockercontainer will be build
+#  tweedle - An installer container runnign the menu based installer and scheduler 
+#  zev - A postgress database image with sample data called 
+#  lexx - The python tool that grabs the demo postgress writes it to csv files and upload them to api
+#  giggerota - A test api container, pretending to be deepfield subi (it just reports back)
+
+######################################
+#platforms
+######################################
+linux
+macos (intel and apple silicon)
+windows wsl2
+
+######################################
+#pre requisits
+######################################
+install docker or docker desktop
+
+######################################
+#start/stop the lab 
+######################################
+#starts the lab and attached to the logs
+docker compose up
+#starts the lab 
+docker compose start 
+#stops the lab
+docker compose stop
+#cleanup
+docker compose rm -f    
+
+######################################
+#Security testing the docker images
+######################################
+docker scout quickview
+docker scout cves local://simonjohngreen/lexx-zev:1.0
+docker scout recommendations local://simonjohngreen/lexx-zev:1.0
+
+
+######################################
+#rebuilding the docker images zev,tweedle,lexx,giggerota locally
+######################################
+. ./build-docker-images.sh  
+
+######################################
+#dumping the tables in the zev subi database manually
+######################################
+docker exec -i lexx-zev mysql -u root -prootpassword -e "SELECT * FROM subi.connections;"
+ 
+mysql: [Warning] Using a password on the command line interface can be insecure.
+id	post_code	modem_type
+1	90210	DSL
+2	10001	Cable
+3	30303	Fiber
+4	SW1A1AA	5G
+5	75001	Satellite
+
+######################################
+#conect to a running container and get a bash shell
+######################################
+docker exec -it lexx-zev bash 
+
+#######################
+#push your private local docker image up to your github
+#######################
+docker login --username=simonjohngreen
+docker image list | grep lexx
+docker tag ba6409e01784 simonjohngreen/lexx:latest
+docker push simonjohngreen/lexx:latest
+docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
+docker image push registry-host:5000/myadmin/rhel-httpd:latest
+
+#######################
+#######################
+#######################
+#######################
+
+######################################
+#conect to a running container and get a bash shell
+######################################
+docker exec -it lexx-zev bash 
+
+
+######################################
+#simplest way to get started: just run my docker image
+######################################
+cd lexx ( you must be in the git dir)
+docker run -d  -v /tmp/lexx-commands:/tmp/lexx-commands --restart always --name=lexx -v ${PWD}/scripts:/scripts -p 8080:8080 simonjohngreen/lexx
+
+######################################
+#dev method, allows you the opertunity to customise the code locally first 
+#From the git source this builds your own private docker image and then runs it. it doesn't use my image from dockerhub.
+######################################
+cd lexx ( you must be in the git dir)
+#build zev the database image
+docker build -f Dockerfile.zev .
+#run the zev image as a seperate docker
+docker run -d -p 3306:3306 --name lexx-zev lex-zev
+
+
+#build the docker image locally using the git repo code 
+docker build -t ubuntu-mysql .
+
+
+docker build --platform=linux/amd64 -t lexx:1.0 .
+#run your local built docker image
+docker run -d --restart always --name=lexx -v /tmp/lexx-commands:/tmp/lexx-commands -v ${PWD}/scripts:/scripts -p 8080:8080 lexx:1.0 
+
+#######################
+#how to push your private local docker image up to github
+#######################
+docker login --username=simonjohngreen 
+docker image list | grep lexx
+docker tag ba6409e01784 simonjohngreen/lexx:latest
+docker push simonjohngreen/lexx:latest
+docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
+docker image push registry-host:5000/myadmin/rhel-httpd:latest
+
+
+#######################
+#to stop and cleanup the lexx docker daemon 
+#######################
+docker stop lexx
+docker rm lexx
+docker image rm [the id of the lexx image]
+
+#cleanup absoluting everything in your docker, good for testing but be carefull in prod
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker rmi --force $(docker images -q)
+
+#######################
+#how to debug the docker build if it fails
+#######################
+#here I change the build command to get the id's
+DOCKER_BUILDKIT=0 docker build --platform=linux/amd64 -t lexx:1.0 .
+#find the container that failed:
+docker ps -a
+#Commit the container id to an image:
+docker commit 6934ada98de6
+docker image list
+#run the image
+docker run -it d035d8a5a34a bash -il
+#try the failed commands inside that docker
+
+#######################
+#connect to a running lexx docker with bash
+#######################
+docker container exec -it lexx /bin/bash
+lexx --help
+
+#######################
+#running lexx in debug 
+#######################
+#uncomment this line of Dockerfile
+#CMD [ "lexx", "--log-level", "debug", "--log-http-request", "--log-hook-output"  ]
+#rebuild and redeploy lexx
+docker logs -f lexx
+#I found wireshark more usefull
+

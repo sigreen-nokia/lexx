@@ -1,0 +1,24 @@
+# Use Ubuntu latest 22.04 as the base image
+FROM ubuntu:22.04
+
+# Set environment variables for non-interactive installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install MySQL server
+RUN apt-get update && \
+    apt-get install -y mysql-server && \
+    apt-get clean
+
+# Set root password and create a default database
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV SUBI_DATABASE_FILE=/zev/subi.sql
+
+# Copy the MySQL startup script
+COPY init-zev.sh /init-zev.sh
+RUN chmod +x /init-zev.sh
+
+# Expose MySQL port
+EXPOSE 3306
+
+# Run the init script and start MySQL
+CMD ["/init-zev.sh"]
