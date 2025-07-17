@@ -25,10 +25,8 @@ install docker or docker desktop
 #start/stop the lab 
 ######################################
 #starts the lab and attaches to the container logs
-docker compose up
+docker compose up --force-recreate
 #cntrl-c to stop 
-#then to clean up 
-docker compose rm -f
 
 ######################################
 #rebuilding the docker images zev,tweedle,lexx,giggerota locally
