@@ -13,3 +13,48 @@
 * Lexx includes tools to install configure and deploy 
 *
 
+
+## Production Topology
+
+
+                    #############            
+                    #           #            
+            <------ #   lexx    # -webhooks->
+             psql   # (adapter) #            
+            queries #           #            
+                    #           #            
+                    #############            
+
+                 ###################
+                 #                 #
+                 #     tweedle     #
+                 # (installation)  #
+                 # (configuration) #
+                 # (scheduling)    #
+                 # (debugging)     #
+                 #                 #
+                 ###################
+
+
+## Docker Lab Topology
+
+
+           ##############         #############             #################
+           #            #         #           #             #               #
+           #    zev     # <------ #   lexx    # -webhooks-> # giggerota     #
+           # (database) #  psql   # (adapter) #             # (rest api)    #
+           #   (node)   # queries #           #             # (listener)    #
+           #            #         #           #             #               #
+           ##############         #############             #################
+
+                               ###################
+                               #                 #
+                               #  tweedle        #
+                               # (installation)  #
+                               # (configuration) #
+                               # (scheduling)    #
+                               # (debugging)     #
+                               #                 #
+                               ###################
+
+

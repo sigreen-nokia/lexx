@@ -20,7 +20,7 @@
                              */.           
                            /.@     
 
-## Whats gazoo:
+## Whats giggerota:
 
 * A Docker based Linux daemon that listens for Deepfield Defender events and speaks what happened (alarms) 
 * It can also be used as a tool to decode webhooks sent from Defender
@@ -28,8 +28,8 @@
 
 ## Licence
 
-* gazoo is Opensource. 
-* gazoo uses webhookd as a base, webhookd is also opensource. 
+* giggerota is Opensource. 
+* giggerota uses webhookd as a base, webhookd is also opensource. 
 
 ## How does it sound:
 
@@ -45,14 +45,14 @@
            #          #      #          #            #                 #
            # Network  #      # Deefield #            # osx/linux/win10 #
            # Under    # ---> # Defender # -webhook-> # host            #
-           # Attack   #      #          #            # running gazoo   #
+           # Attack   #      #          #            # running giggerota   #
            #          #      #          #            #                 #
            ############      ############            ###################
      
 ## installing the code
 
-* if you are not familiar with github, just download the zip from here, https://github.com/sigreen-nokia/gazoo  unzip it locally. Open a terminal
-* if you are familiar with github cli then you can use "git clone https://github.com/sigreen-nokia/gazoo.git"
+* if you are not familiar with github, just download the zip from here, https://github.com/sigreen-nokia/giggerota  unzip it locally. Open a terminal
+* if you are familiar with github cli then you can use "git clone https://github.com/sigreen-nokia/giggerota.git"
 
 ## platforms
 
@@ -68,8 +68,8 @@
 ## The simplest way to get started: just run my docker image
 
 ```
-cd gazoo (you must be in the gazoo git)
-docker run -d  -v /tmp/gazoo-commands:/tmp/gazoo-commands --restart always --name=gazoo -v ${PWD}/scripts:/scripts -p 8080:8080 simonjohngreen/gazoo
+cd giggerota (you must be in the giggerota git)
+docker run -d  -v /tmp/giggerota-commands:/tmp/giggerota-commands --restart always --name=giggerota -v ${PWD}/scripts:/scripts -p 8080:8080 simonjohngreen/giggerota
 ```
 
 ## Developer method (if you want to build the docker image yourself)
@@ -79,9 +79,9 @@ docker run -d  -v /tmp/gazoo-commands:/tmp/gazoo-commands --restart always --nam
 * It doesn't use my image from dockerhub.
 
 ```
-cd gazoo (you much be in the gazoo git dir) 
-docker build --platform=linux/amd64 -t gazoo:1.0 .
-docker run -d --restart always --name=gazoo -v /tmp/gazoo-commands:/tmp/gazoo-commands -v ${PWD}/scripts:/scripts -p 8080:8080 gazoo:1.0
+cd giggerota (you much be in the giggerota git dir) 
+docker build --platform=linux/amd64 -t giggerota:1.0 .
+docker run -d --restart always --name=giggerota -v /tmp/giggerota-commands:/tmp/giggerota-commands -v ${PWD}/scripts:/scripts -p 8080:8080 giggerota:1.0
 ```
 
 

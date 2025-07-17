@@ -7,7 +7,7 @@ FROM golang:1.21 AS builder
 ARG REPOSITORY=github.com/sigreen-nokia
 
 # Artifact name
-ARG ARTIFACT=gazoo
+ARG ARTIFACT=giggerota
 
 # Copy sources into the container
 ADD . /go/src/$REPOSITORY/$ARTIFACT
@@ -27,10 +27,10 @@ FROM alpine:latest AS slim
 ARG REPOSITORY=github.com/sigreen-nokia
 
 # Artifact name
-ARG ARTIFACT=gazoo
+ARG ARTIFACT=giggerota
 
 # User
-ARG USER=gazoo
+ARG USER=giggerota
 ARG UID=1000
 
 # Create non-root user
@@ -54,7 +54,7 @@ EXPOSE 8080
 
 USER $USER
 
-CMD [ "gazoo" ]
+CMD [ "giggerota" ]
 
 #########################################
 # Distribution stage with some tooling
@@ -65,10 +65,10 @@ FROM alpinelinux/docker-cli:latest AS distrib
 ARG REPOSITORY=github.com/sigreen-nokia
 
 # Artifact name
-ARG ARTIFACT=gazoo
+ARG ARTIFACT=giggerota
 
 # User
-ARG USER=gazoo
+ARG USER=giggerota
 ARG UID=1000
 
 # Create non-root user
@@ -97,12 +97,12 @@ EXPOSE 8080
 USER $USER
 
 #http
-CMD [ "gazoo" ]
+CMD [ "giggerota" ]
 #https using tls
 #this tls options requires certificates
-#CMD [ "gazoo", "--tls" ]
+#CMD [ "giggerota", "--tls" ]
 #https tls using acme protocol (you must specify your domain)
-#CMD [ "gazoo", "--tls", "--tls-domain=hook.example.com" ]
-#debugging gazoo
-#CMD [ "gazoo", "--log-level", "debug", "--log-http-request", "--log-hook-output"  ]
+#CMD [ "giggerota", "--tls", "--tls-domain=hook.example.com" ]
+#debugging giggerota
+#CMD [ "giggerota", "--log-level", "debug", "--log-http-request", "--log-hook-output"  ]
 
