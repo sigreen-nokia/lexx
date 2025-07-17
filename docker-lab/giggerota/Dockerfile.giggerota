@@ -83,9 +83,10 @@ RUN adduser \
 # Install deps
 RUN apk add --no-cache bash gcompat git openssl openssh-client curl jq docker-cli-compose aha
 
-# Install binary and entrypoint
+# Install binary , entrypoint and script to use
 COPY --from=builder /go/src/$REPOSITORY/$ARTIFACT/release/$ARTIFACT /usr/local/bin/$ARTIFACT
 COPY docker-entrypoint.sh /
+COPY scripts/default.sh scripts/default.sh
 
 # Define entrypoint
 ENTRYPOINT ["/docker-entrypoint.sh"]

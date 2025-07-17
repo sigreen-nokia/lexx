@@ -1,17 +1,17 @@
 #!/bin/bash
 
 #dump any rest api that arrives to the screen
-#the output goes to file /tmp/giggerota/message-decode
-#to watch it on the host "tail -f /tmp/giggerota/message-decode"
-
-echo "DEBUG: default.sh was ran as the webhook url ended in a /" >> /tmp/giggerota/message-decode
-echo "DEBUG: Hook information: hook_name=$hook_name, hook_id=$hook_id, hook_method=$hook_method" >> /tmp/giggerota/message-decode
-echo "DEBUG: Hook information: x_forwarded_for=$x_forwarded_for, x_webauth_user=$x_webauth_user" >> /tmp/giggerota/message-decode
-echo "DEBUG: Query parameter: Status=$Status" >> /tmp/giggerota/message-decode
-echo "DEBUG: Header parameter: user-agent=$user_agent" >> /tmp/giggerota/message-decode
-echo "DEBUG: JSON data block decoded:" >> /tmp/giggerota/message-decode
-echo "DEBUG: Payload Raw JSON" >> /tmp/giggerota/message-decode
-echo "$1" >> /tmp/giggerota/message-decode
-echo "DEBUG: Payload Formatted JSON" >> /tmp/giggerota/message-decode
-echo "$1" | jq . >> /tmp/giggerota/message-decode
+#anyting exho'd here will be sent in the rest api responce
+#anyting sent to > /proc/1/fd/1 will be seen in the docker logs 
+echo "default.sh was ran as the webhook url ended in a /" > /proc/1/fd/1 
+echo "Hook information: hook_name=$hook_name, hook_id=$hook_id, hook_method=$hook_method" > /proc/1/fd/1 
+echo "Hook information: x_forwarded_for=$x_forwarded_for, x_webauth_user=$x_webauth_user" > /proc/1/fd/1 
+echo "Query parameter: Status=$Status" > /proc/1/fd/1 
+echo "Header parameter: user-agent=$user_agent" > /proc/1/fd/1 
+echo "JSON data block decoded:" > /proc/1/fd/1 
+echo "Payload Raw JSON" > /proc/1/fd/1 
+echo "$1" > /proc/1/fd/1 
+echo "DEBUG: Payload Formatted JSON" > /proc/1/fd/1 
+echo "$1" | jq . > /proc/1/fd/1 
+echo "$1" | jq . 
 

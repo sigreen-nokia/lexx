@@ -1,5 +1,10 @@
 #!/bin/sh
 
+printf "##########################lexx-giggerota hints################################\n"
+printf "you can test lexx-giggerota with the following curl: \n"
+printf "##############################################################################\n"
+
+
 # Error function
 die() { echo "error: $@" 1>&2 ; exit 1; }
 

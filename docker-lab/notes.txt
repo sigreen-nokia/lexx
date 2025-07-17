@@ -26,12 +26,9 @@ install docker or docker desktop
 ######################################
 #starts the lab and attaches to the container logs
 docker compose up
-#starts the lab without seeing the logs 
-docker compose start 
-#stops the lab
-docker compose stop
-#cleanup the lab
-docker compose rm -f    
+#cntrl-c to stop 
+#then to clean up 
+docker compose rm -f
 
 ######################################
 #rebuilding the docker images zev,tweedle,lexx,giggerota locally
@@ -51,10 +48,16 @@ id	post_code	modem_type
 4	SW1A1AA	5G
 5	75001	Satellite
 
+#########################################
+#sending test restapi events to giggerota. You will see them decoded in the docker compose console
+#########################################
+curl --data '{"Event ID":"7", "Status":"ACTIVE"}' -H 'Content-Type: application/json' http://localhost:8080/
+
 ######################################
 #conect to a running container and get a bash shell
 ######################################
 docker exec -it lexx-zev bash 
+docker exec -it lexx-giggerota bash 
 
 #######################
 #push the private local docker images up to my github

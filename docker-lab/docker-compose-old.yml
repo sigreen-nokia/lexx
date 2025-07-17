@@ -22,3 +22,5 @@ services:
     environment:
     - WHD_SCRIPTS=/scripts
     - WHD_FILENAME=/default
+    volumes:
+    - ./scripts:/scripts

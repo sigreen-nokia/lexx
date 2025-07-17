@@ -17,8 +17,6 @@ mysql -uroot -p${MYSQL_ROOT_PASSWORD} < ${SUBI_DATABASE_FILE}
 printf "##########################lexx-zev hints#####################################\n"
 printf "you can connect to the lexx-zev database and dump the database using command: \n"
 printf "docker exec -i lexx-zev mysql -u root -prootpassword -e \"SELECT * FROM subi.connections;\" \n"
-printf "you can connect to the lexx-zev database and grab a linux shell with command: \n"
-printf "docker exec -it lexx-zev bash \n"
 printf "##############################################################################\n"
 
 
