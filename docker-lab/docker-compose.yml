@@ -2,7 +2,7 @@ version: "3.6"
 
 services:
   lexx-zev:
-    hostname: lexx 
+    hostname: lexx-zev 
     image: simonjohngreen/lexx-zev:1.0
     container_name: lexx-zev 
     restart: always

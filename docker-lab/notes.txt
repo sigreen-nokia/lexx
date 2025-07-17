@@ -24,22 +24,14 @@ install docker or docker desktop
 ######################################
 #start/stop the lab 
 ######################################
-#starts the lab and attached to the logs
+#starts the lab and attaches to the container logs
 docker compose up
-#starts the lab 
+#starts the lab without seeing the logs 
 docker compose start 
 #stops the lab
 docker compose stop
-#cleanup
+#cleanup the lab
 docker compose rm -f    
-
-######################################
-#Security testing the docker images
-######################################
-docker scout quickview
-docker scout cves local://simonjohngreen/lexx-zev:1.0
-docker scout recommendations local://simonjohngreen/lexx-zev:1.0
-
 
 ######################################
 #rebuilding the docker images zev,tweedle,lexx,giggerota locally
@@ -65,7 +57,7 @@ id	post_code	modem_type
 docker exec -it lexx-zev bash 
 
 #######################
-#push your private local docker image up to your github
+#push the private local docker images up to my github
 #######################
 docker login --username=simonjohngreen
 docker image list | grep lexx
@@ -73,6 +65,14 @@ docker tag ba6409e01784 simonjohngreen/lexx:latest
 docker push simonjohngreen/lexx:latest
 docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
 docker image push registry-host:5000/myadmin/rhel-httpd:latest
+
+######################################
+#Security testing the docker images
+######################################
+docker scout quickview
+docker scout cves local://simonjohngreen/lexx-zev:1.0
+docker scout recommendations local://simonjohngreen/lexx-zev:1.0
+
 
 #######################
 #######################
