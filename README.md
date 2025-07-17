@@ -55,8 +55,8 @@
                                ###################
 
 * to build and run the docker based lab 
-...
+```
 cd docker-lab
 docker compose up --force-recreate
 cntrl-c to stop the lab 
-...
+```
