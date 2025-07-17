@@ -12,3 +12,16 @@ services:
     - SUBI_DATABASE_FILE=/zev/subi.sql 
     volumes:
     - ./zev:/zev
+
+  giggerota:
+    hostname: giggerota  
+    image: simonjohngreen/giggerota:1.0
+    container_name: giggerota 
+    restart: always
+    ports:
+    - "8080:8080"
+    environment:
+    - WHD_SCRIPTS=/scripts
+    - WHD_FILENAME=/default
+    volumes:
+    - ./scripts:/scripts

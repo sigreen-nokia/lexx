@@ -1,7 +1,7 @@
 ######################################
 #docker based lab
 ######################################
-#These steps will build a docker based environment locally in order to test and develop the lexx code
+#These steps will build a docker based lab environment locally in order to test and develop the lexx code
 #
 #four dockercontainer will be build
 #  tweedle - An installer container runnign the menu based installer and scheduler 
