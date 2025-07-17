@@ -9,10 +9,9 @@
 
 * A suit of tools to fetch data from psql databases and ingest it into subi
 * 
-* Lexx includes tools to run an test the workflow locally on docker
-* Lexx includes tools to install configure and deploy 
+* Lexx includes tools to run a test environment locally in docker
+* Lexx includes tools to install configure and deploy in production 
 *
-
 
 ## Production Topology
 
