@@ -1,0 +1,20 @@
+# Use Ubuntu latest 22.04 as the base image
+#FROM ubuntu:22.04
+FROM python:3
+
+# Set environment variables for non-interactive installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install MySQL server
+RUN apt-get update && \
+    apt-get clean
+
+# Copy the init script and tweedle.py in to the container 
+COPY init-tweedle.sh /init-tweedle.sh  
+RUN chmod +x /init-tweedle.sh
+COPY tweedle.py.copy /tweedle.py
+RUN chmod +x /tweedle.py
+COPY notes.txt.copy /docker-lab/notes.txt
+
+# Run the init script 
+CMD ["/init-tweedle.sh"]

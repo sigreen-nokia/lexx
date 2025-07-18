@@ -22,3 +22,9 @@ services:
     environment:
     - WHD_SCRIPTS=/scripts
     - WHD_FILENAME=/default
+  lexx-tweedle:
+    hostname: lexx-tweedle
+    image: simonjohngreen/lexx-tweedle:1.0
+    container_name: lexx-tweedle 
+    restart: always
+
