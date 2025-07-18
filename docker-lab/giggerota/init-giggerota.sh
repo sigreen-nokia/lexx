@@ -1,7 +1,8 @@
 #!/bin/sh
 
 printf "##########################lexx-giggerota hints################################\n"
-printf "you can test lexx-giggerota with the following curl: \n"
+printf "you can test lexx-giggerota restapi with the following curl: \n"
+printf "curl -X POST \"http://localhost:8080/api/subscribers/ingest/match?api_key=12345678&format=csv&validate=on\" -F 'upload_files=@giggerota/match_file.csv' \n"
 printf "##############################################################################\n"
 
 

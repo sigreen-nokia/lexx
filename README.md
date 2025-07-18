@@ -57,6 +57,8 @@
 * to build and run the docker based lab 
 ```
 cd docker-lab
+. ./build-docker-images.sh
 docker compose up --force-recreate
 cntrl-c to stop the lab 
+#for more details see docker-lab/notes.txt
 ```

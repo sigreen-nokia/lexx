@@ -1,21 +1,22 @@
 -- Create the database
-CREATE DATABASE IF NOT EXISTS subi;
+CREATE DATABASE IF NOT EXISTS subscribers;
 
 -- Use the database
-USE subi;
+USE subscribers;
 
 -- Create the table
 CREATE TABLE IF NOT EXISTS connections (
-    id INT PRIMARY KEY,
-    post_code VARCHAR(20),
-    modem_type VARCHAR(50)
+    subid VARCHAR(20) PRIMARY KEY,
+    ADSLCircuitId VARCHAR(20),
+    market VARCHAR(50),
+    rate_plan VARCHAR(50)
 );
 
--- Insert example data with explicit IDs
-INSERT INTO connections (id, post_code, modem_type) VALUES
-(1, '90210', 'DSL'),
-(2, '10001', 'Cable'),
-(3, '30303', 'Fiber'),
-(4, 'SW1A1AA', '5G'),
-(5, '75001', 'Satellite');
+-- Insert example data with explicit subids 
+INSERT INTO connections (subid, ADSLCircuitId, market, rate_plan) VALUES
+('SUB7', 'BSDADF123', 'Antwerp', '150d20u'),
+('SUB11', 'BSDEAF123', 'Nuremberg', '150e11u'),
+('SUB21', 'FGDADF123', 'Antwerp', '160e13d'),
+('SUB4', 'PGDAD123', 'Antwerp', '220a21f'),
+('SUB5', 'RSAUSD536', 'Frankfurt', '150d20u');
 

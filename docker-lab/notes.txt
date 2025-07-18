@@ -22,34 +22,35 @@ windows wsl2
 install docker or docker desktop
 
 ######################################
+#building the docker images zev,tweedle,lexx,giggerota locally
+######################################
+. ./build-docker-images.sh
+
+######################################
 #start/stop the lab 
 ######################################
-#starts the lab and attaches to the container logs
 docker compose up --force-recreate
+#attaches to the container logs
 #cntrl-c to stop 
 
 ######################################
-#rebuilding the docker images zev,tweedle,lexx,giggerota locally
+#dumping the tables in the zev subi test database manually
 ######################################
-. ./build-docker-images.sh  
-
-######################################
-#dumping the tables in the zev subi database manually
-######################################
-docker exec -i lexx-zev mysql -u root -prootpassword -e "SELECT * FROM subi.connections;"
+docker exec -i lexx-zev mysql -u root -prootpassword -e "SELECT * FROM subscribers.connections;"
  
-mysql: [Warning] Using a password on the command line interface can be insecure.
-id	post_code	modem_type
-1	90210	DSL
-2	10001	Cable
-3	30303	Fiber
-4	SW1A1AA	5G
-5	75001	Satellite
+subid	ADSLCircuitId	market	rate_plan
+SUB11	BSDEAF123	Nuremberg	150e11u
+SUB21	FGDADF123	Antwerp	160e13d
+SUB4	PGDAD123	Antwerp	220a21f
+SUB5	RSAUSD536	Frankfurt	150d20u
+SUB7	BSDADF123	Antwerp	150d20u
 
 #########################################
 #sending test restapi events to giggerota. You will see them decoded in the docker compose console
 #########################################
+cd docker_lab
 curl --data '{"Event ID":"7", "Status":"ACTIVE"}' -H 'Content-Type: application/json' http://localhost:8080/
+curl -X POST "http://localhost:8080/api/subscribers/ingest/match?api_key=12345678&format=csv&validate=off" -F 'upload_files=@giggerota/match_file.csv'
 
 ######################################
 #conect to a running container and get a bash shell
